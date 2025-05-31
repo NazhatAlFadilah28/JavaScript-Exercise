@@ -1,29 +1,88 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>tabung.com</title>
+  <title>Menghitung Tabung</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f0f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      background: #fff;
+      padding: 20px 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      max-width: 400px;
+      width: 100%;
+    }
+    h2 {
+      text-align: center;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+    .result {
+      margin-top: 15px;
+      font-weight: bold;
+    }
+  </style>
 </head>
-<h3><i>Tabung Geometri</i></h3>
 <body>
-<div>
-  <input type="number" id="jari-jari">
+
+<div class="container">
+  <h2>Rumus Tabung</h2>
+  <label for="radius">Jari-jari (r):</label>
+  <input type="number" id="radius" placeholder="Masukkan jari-jari">
+
+  <label for="height">Tinggi (t):</label>
+  <input type="number" id="height" placeholder="Masukkan tinggi">
+
+  <button onclick="hitungTabung()">Hitung</button>
+
+  <div class="result" id="output"></div>
 </div>
-  <div>
-    <input type="number" id="tinggi">
-  </div>
-  <div>
-    <button id="btn-hitung">Hitung Hasil</button>
-  </div>
-  <div>
-    volume : <span id="txt-volume"> </span> m <sub>2</sub>
-  <div>
 
-    <div>
-    Luas keliling alas/tutup: <span id="txt-keliling"> </span>m <sub>2</sub>
-    </div>
+<script>
+  function hitungTabung() {
+    const r = parseFloat(document.getElementById("radius").value);
+    const t = parseFloat(document.getElementById("height").value);
+    const π = Math.PI;
 
-    <script src="tabung.js"></script>
+    if (isNaN(r) || isNaN(t)) {
+      document.getElementById("output").innerHTML = "Harap masukkan angka yang valid!";
+      return;
+    }
+
+    const volume = π * r * r * t;
+    const luas = 2 * π * r * (r + t);
+
+    document.getElementById("output").innerHTML = `
+      Volume: ${volume.toFixed(2)}<br>
+      Luas Permukaan: ${luas.toFixed(2)}
+    `;
+  }
+</script>
+
 </body>
 </html>

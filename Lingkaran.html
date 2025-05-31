@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Kalkulator Lingkaran</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      background: white;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 400px;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .circle-image {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      margin: 0 auto 20px;
+      overflow: hidden;
+      border: 10px solid #7300ff;
+    }
+    .circle-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+    .result {
+      margin-top: 15px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>RUMUS Lingkaran</h2>
+
+  <div class="circle-image">
+    
+  </div>
+
+  <label for="jari">Jari-jari (r):</label>
+  <input type="number" id="jari" placeholder="Masukkan jari-jari">
+
+  <button onclick="hitungLingkaran()">Hitung</button>
+
+  <div class="result" id="output"></div>
+</div>
+
+<script>
+  function hitungLingkaran() {
+    const r = parseFloat(document.getElementById("jari").value);
+
+    if (isNaN(r) || r <= 0) {
+      document.getElementById("output").innerHTML = "Masukkan jari-jari yang valid!";
+      return;
+    }
+
+    const luas = Math.PI * r * r;
+    const keliling = 2 * Math.PI * r;
+
+    document.getElementById("output").innerHTML = `
+      Luas Lingkaran: ${luas.toFixed(2)}<br>
+      Keliling Lingkaran: ${keliling.toFixed(2)}
+    `;
+  }
+</script>
+
+</body>
+</html>

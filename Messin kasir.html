@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Mesin Kasir Sederhana</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+    th, td { border: 1px solid #ddd; padding: 8px; text-align: center; }
+    input[type="number"] { width: 60px; }
+    .total, .kembalian { font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h2>Mesin Kasir Sederhana</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Item</th>
+        <th>Harga</th>
+        <th>Jumlah</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Roti</td>
+        <td>Rp <span class="harga" data-harga="5000">5000</span></td>
+        <td><input type="number" class="jumlah" min="0" value="0" /></td>
+      </tr>
+      <tr>
+        <td>Susu</td>
+        <td>Rp <span class="harga" data-harga="8000">8000</span></td>
+        <td><input type="number" class="jumlah" min="0" value="0" /></td>
+      </tr>
+      <tr>
+        <td>Telur</td>
+        <td>Rp <span class="harga" data-harga="10000">10000</span></td>
+        <td><input type="number" class="jumlah" min="0" value="0" /></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <button onclick="hitungTotal()">Hitung Total</button>
+
+  <p class="total">Total: Rp <span id="total">0</span></p>
+
+  <label for="bayar">Uang Dibayar: Rp </label>
+  <input type="number" id="bayar" />
+  <button onclick="hitungKembalian()">Hitung Kembalian</button>
+
+  <p class="kembalian">Kembalian: Rp <span id="kembalian">0</span></p>
+
+  <script>
+    function hitungTotal() {
+      let total = 0;
+      const hargaEls = document.querySelectorAll('.harga');
+      const jumlahEls = document.querySelectorAll('.jumlah');
+
+      hargaEls.forEach((el, i) => {
+        const harga = parseInt(el.getAttribute('data-harga'));
+        const jumlah = parseInt(jumlahEls[i].value);
+        total += harga * jumlah;
+      });
+
+      document.getElementById('total').textContent = total;
+    }
+
+    function hitungKembalian() {
+      const total = parseInt(document.getElementById('total').textContent);
+      const bayar = parseInt(document.getElementById('bayar').value);
+      const kembalian = bayar - total;
+
+      document.getElementById('kembalian').textContent = kembalian >= 0 ? kembalian : "Uang kurang!";
+    }
+  </script>
+</body>
+</html>
