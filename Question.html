@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Kuis Pilihan Ganda ABCD</title>
+</head>
+<body>
+
+  <h1>Kuis Sederhana</h1>
+
+  <div id="quiz">
+    <div id="question"></div>
+    <div id="options"></div>
+    <button onclick="nextQuestion()">Soal Berikutnya</button>
+    <div id="result"></div>
+  </div>
+
+  <script>
+    const questions = [
+      {
+        question: "Apa ibu kota Indonesia?",
+        options: ["A. Surabaya", "B. Jakarta", "C. Bandung", "D. Medan"],
+        answer: 1
+      },
+      {
+        question: "2 + 2 = ?",
+        options: ["A. 3", "B. 5", "C. 4", "D. 6"],
+        answer: 2
+      },
+      {
+        question: "Hewan pemakan daging disebut?",
+        options: ["A. Herbivora", "B. Karnivora", "C. Omnivora", "D. Insektivora"],
+        answer: 1
+      }
+    ];
+
+    let current = 0;
+    let score = 0;
+
+    function loadQuestion() {
+      document.getElementById("result").textContent = "";
+      const q = questions[current];
+      document.getElementById("question").textContent = (current + 1) + ". " + q.question;
+
+      const optionsDiv = document.getElementById("options");
+      optionsDiv.innerHTML = "";
+      q.options.forEach((opt, index) => {
+        const btn = document.createElement("button");
+        btn.textContent = opt;
+        btn.onclick = () => checkAnswer(index);
+        optionsDiv.appendChild(btn);
+        optionsDiv.appendChild(document.createElement("br"));
+      });
+    }
+
+    function checkAnswer(selected) {
+      const correct = questions[current].answer;
+      if (selected === correct) {
+        document.getElementById("result").textContent = "✅ Jawaban Benar!";
+        score++;
+      } else {
+        document.getElementById("result").textContent = "❌ Jawaban Salah.";
+      }
+
+      // Nonaktifkan tombol setelah dijawab
+      const btns = document.querySelectorAll("#options button");
+      btns.forEach(btn => btn.disabled = true);
+    }
+
+    function nextQuestion() {
+      if (current < questions.length - 1) {
+        current++;
+        loadQuestion();
+      } else {
+        document.getElementById("quiz").innerHTML = `
+          <h2>Skor Akhir: ${score} dari ${questions.length}</h2>
+        `;
+      }
+    }
+
+    loadQuestion();
+  </script>
+
+</body>
+</html>

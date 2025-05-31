@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lampu Menyala</title>
+</head>
+<body>
+
+    <h1>Lampu On/Off</h1>
+
+    <div class="lamp-container">
+        <div id="lamp" class="lamp off"></div>
+    </div>
+
+    <button onclick="nyalakanLampu()">Nyalakan</button>
+    <button onclick="matikanLampu()">Matikan</button>
+
+    <style>
+      body {
+    text-align: center;
+    margin-top: 50px;
+    font-family: sans-serif;
+}
+
+.lamp-container {
+    margin: 20px auto;
+    width: 100px;
+    height: 100px;
+}
+
+.lamp {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin: auto;
+    border: 2px solid #333;
+    background-color: grey;
+    transition: background-color 0.3s;
+}
+
+.lamp.on {
+    background-color: yellow;
+}
+
+.lamp.off {
+    background-color: grey;
+}
+    </style>
+
+    <script src="Lampu_menyala.js"></script>
+</body>
+</html>

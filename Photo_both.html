@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Photo Booth Sederhana</title>
+</head>
+<body>
+  <div class="container">
+    <h1>📸 Photo Booth</h1>
+
+    <video id="video" autoplay></video>
+    <button id="snap">Ambil Foto</button>
+    <canvas id="canvas" style="display:none;"></canvas>
+
+    <div id="photos"></div>
+  </div>
+
+  <style>
+    body {
+  font-family: Arial, sans-serif;
+  background: #f0f0f0;
+  text-align: center;
+  padding: 20px;
+}
+
+.container {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  display: inline-block;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+video {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 10px;
+}
+
+button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  background: #28a745;
+  color: white;
+  border: none;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #218838;
+}
+
+#photos {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+#photos img {
+  width: 150px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+  </style>
+
+  <script src="Photo_both.js"></script>
+</body>
+</html>

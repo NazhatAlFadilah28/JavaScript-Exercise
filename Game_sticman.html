@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Stickman Battle</title>
+</head>
+<body>
+  <div class="game-container">
+    <h1>🗡 Stickman Battle</h1>
+
+    <div class="battlefield">
+      <div class="character player">
+        <div class="stickman">🤺</div>
+        <div class="health-bar" id="player-health"></div>
+      </div>
+
+      <div class="character enemy">
+        <div class="stickman">👹</div>
+        <div class="health-bar" id="enemy-health"></div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button onclick="attackEnemy()">🗡 Serang Musuh</button>
+    </div>
+
+    <div id="result" class="result"></div>
+  </div>
+
+  <style>
+    body {
+  font-family: Arial, sans-serif;
+  background: #f0f0f0;
+  text-align: center;
+  padding: 20px;
+}
+
+.game-container {
+  background: white;
+  display: inline-block;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+  width: 400px;
+}
+
+.battlefield {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.character {
+  width: 45%;
+}
+
+.stickman {
+  font-size: 60px;
+}
+
+.health-bar {
+  height: 20px;
+  background: green;
+  border-radius: 5px;
+  margin-top: 5px;
+  transition: width 0.3s ease;
+}
+
+.controls button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.controls button:hover {
+  background: #0056b3;
+}
+
+.result {
+  margin-top: 20px;
+  font-size: 20px;
+  font-weight: bold;
+}
+  </style>
+
+  <script src="Game_sticman.js"></script>
+</body>
+</html>
