@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tip Calculator</title>
+    <style>
+      body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    width: 100%;
+    max-width: 400px;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 1.5rem;
+}
+
+.calculator {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+label {
+    font-weight: bold;
+    color: #555;
+}
+
+input {
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 1rem;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+.results {
+    margin-top: 1.5rem;
+    border-top: 1px solid #eee;
+    padding-top: 1.5rem;
+}
+
+.result-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.8rem;
+    font-size: 1.1rem;
+}
+
+.result-item span:first-child {
+    font-weight: bold;
+    color: #333;
+}
+
+.result-item span:last-child {
+    color: #4CAF50;
+    font-weight: bold;
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Tip Calculator</h1>
+        <div class="calculator">
+            <div class="input-group">
+                <label for="bill-amount">Bill Amount:</label>
+                <input type="number" id="bill-amount" placeholder="Enter bill amount">
+            </div>
+            <div class="input-group">
+                <label for="tip-percentage">Tip Percentage:</label>
+                <input type="number" id="tip-percentage" placeholder="Enter tip percentage" value="15">
+            </div>
+            <div class="input-group">
+                <label for="people-count">Number of People:</label>
+                <input type="number" id="people-count" placeholder="Number of people" value="1">
+            </div>
+            <button id="calculate-btn">Calculate Tip</button>
+            <div id="results" class="results">
+                <div class="result-item">
+                    <span>Total Tip:</span>
+                    <span id="total-tip">$0.00</span>
+                </div>
+                <div class="result-item">
+                    <span>Total Bill:</span>
+                    <span id="total-bill">$0.00</span>
+                </div>
+                <div class="result-item">
+                    <span>Tip per Person:</span>
+                    <span id="tip-per-person">$0.00</span>
+                </div>
+                <div class="result-item">
+                    <span>Total per Person:</span>
+                    <span id="total-per-person">$0.00</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="tip_calculator.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+    const calculateBtn = DOMHelper.getElement('calculate-btn');
+    
+    calculateBtn.addEventListener('click', () => {
+        const billAmount = DOMHelper.getInputValue('bill-amount');
+        const tipPercentage = DOMHelper.getInputValue('tip-percentage');
+        const numberOfPeople = DOMHelper.getInputValue('people-count');
+        
+        if (billAmount <= 0) {
+            alert('Please enter a valid bill amount');
+            return;
+        }
+        
+        if (numberOfPeople < 1) {
+            alert('Number of people must be at least 1');
+            return;
+        }
+        
+        const results = TipCalculator.calculateAll(billAmount, tipPercentage, numberOfPeople);
+        
+        DOMHelper.setResult('total-tip', results.tipAmount);
+        DOMHelper.setResult('total-bill', results.totalBill);
+        DOMHelper.setResult('tip-per-person', results.tipPerPerson);
+        DOMHelper.setResult('total-per-person', results.totalPerPerson);
+    });
+});
+  </script>
+  <script>
+    class DOMHelper {
+    static getElement(id) {
+        return document.getElementById(id);
+    }
+
+    static getInputValue(id) {
+        const element = this.getElement(id);
+        return element.value ? parseFloat(element.value) : 0;
+    }
+
+    static setResult(id, value) {
+        const element = this.getElement(id);
+        element.textContent = `$${value.toFixed(2)}`;
+    }
+
+    static formatCurrency(amount) {
+        return new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: 'USD'
+        }).format(amount);
+    }
+}
+  </script>
+</body>
+</html>

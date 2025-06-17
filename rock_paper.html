@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors Game</title>
+    <style>
+      body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.game-container {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+}
+
+.choices {
+    display: flex;
+    justify-content: space-around;
+    margin: 30px 0;
+}
+
+.choice {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    transition: all 0.3s;
+}
+
+.choice:hover {
+    background-color: #45a049;
+    transform: scale(1.1);
+}
+
+.choice i {
+    font-size: 40px;
+}
+
+.result {
+    margin: 20px 0;
+    font-size: 24px;
+    font-weight: bold;
+    min-height: 30px;
+}
+
+.scores {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+}
+
+.score {
+    font-size: 18px;
+}
+
+.reset-btn {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 10px 0;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.reset-btn:hover {
+    background-color: #d32f2f;
+}
+
+.selections {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+}
+
+.selection {
+    font-size: 50px;
+    margin: 0 20px;
+}
+
+@media (max-width: 500px) {
+    .choices {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .choice {
+        margin: 10px 0;
+    }
+}
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="game-container">
+        <h1>Rock Paper Scissors</h1>
+        
+        <div class="selections">
+            <div class="selection" id="player-selection">🤔</div>
+            <div class="selection" id="computer-selection">🤖</div>
+        </div>
+        
+        <div class="result" id="result">Choose your move!</div>
+        
+        <div class="choices">
+            <button class="choice" id="rock"><i class="fas fa-hand-rock"></i></button>
+            <button class="choice" id="paper"><i class="fas fa-hand-paper"></i></button>
+            <button class="choice" id="scissors"><i class="fas fa-hand-scissors"></i></button>
+        </div>
+        
+        <div class="scores">
+            <div class="score">Player: <span id="player-score">0</span></div>
+            <div class="score">Computer: <span id="computer-score">0</span></div>
+        </div>
+        
+        <button class="reset-btn" id="reset">Reset Game</button>
+    </div>
+
+    <script src="rock_peper.js"></script>
+</body>
+</html>

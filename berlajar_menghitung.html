@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Belajar Matematika</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap');
+
+body {
+  font-family: 'Comic Neue', cursive;
+  background: linear-gradient(135deg, #f0f4ff 0%, #d9e7ff 100%);
+  margin: 0;
+  padding: 20px;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  width: 100%;
+  max-width: 600px;
+  text-align: center;
+}
+
+h1 {
+  color: #3a86ff;
+  margin-bottom: 25px;
+  font-size: 2.2rem;
+}
+
+.problem {
+  font-size: 2rem;
+  margin-bottom: 30px;
+  font-weight: bold;
+  color: #333;
+}
+
+.visualization {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 30px 0;
+  min-height: 100px;
+  align-items: center;
+}
+
+.visualization img {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  transition: all 0.3s;
+}
+
+.visualization img:hover {
+  transform: scale(1.2) rotate(10deg);
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+input[type="number"] {
+  padding: 12px 15px;
+  font-size: 1.2rem;
+  border: 2px solid #3a86ff;
+  border-radius: 8px;
+  width: 150px;
+  text-align: center;
+  font-family: 'Comic Neue', cursive;
+}
+
+input[type="number"]:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(58, 134, 255, 0.3);
+}
+
+button {
+  padding: 12px 25px;
+  font-size: 1.1rem;
+  background-color: #3a86ff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-family: 'Comic Neue', cursive;
+  font-weight: bold;
+}
+
+button:hover {
+  background-color: #2667d6;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.result {
+  font-size: 1.5rem;
+  font-weight: bold;
+  min-height: 30px;
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 8px;
+  transition: all 0.3s;
+}
+
+.correct {
+  color: #2ecc71;
+  background-color: rgba(46, 204, 113, 0.1);
+}
+
+.incorrect {
+  color: #e74c3c;
+  background-color: rgba(231, 76, 60, 0.1);
+}
+
+@media (max-width: 500px) {
+  .container {
+    padding: 20px;
+  }
+  
+  h1 {
+    font-size: 1.8rem;
+  }
+  
+  .problem {
+    font-size: 1.6rem;
+  }
+  
+  .visualization img {
+    width: 50px;
+    height: 50px;
+  }
+}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Belajar Hitung dengan Gambar ⭐</h1>
+    
+    <div class="problem" id="problem"></div>
+    
+    <div class="visualization" id="visualization"></div>
+    
+    <div class="input-group">
+      <input type="number" id="answer" placeholder="Jawaban" min="0">
+      <button id="check-btn">Cek Jawaban</button>
+    </div>
+    
+    <div class="result" id="result"></div>
+  </div>
+  <script>
+    const problemElement = document.getElementById('problem');
+const visualization = document.getElementById('visualization');
+const answerInput = document.getElementById('answer');
+const checkBtn = document.getElementById('check-btn');
+const resultElement = document.getElementById('result');
+
+const operations = ["+", "-", "×"];
+const images = [
+  "https://cdn-icons-png.flaticon.com/512/1828/1828884.png", 
+  "https://cdn-icons-png.flaticon.com/512/1828/1828884.png", 
+  "https://cdn-icons-png.flaticon.com/512/1828/1828884.png", 
+  "https://cdn-icons-png.flaticon.com/512/1828/1828884.png", 
+  "https://cdn-icons-png.flaticon.com/512/1828/1828884.png", 
+];
+
+let currentAnswer = 0;
+
+function generateProblem() {
+  const num1 = Math.floor(Math.random() * 5) + 1;
+  const num2 = Math.floor(Math.random() * 5) + 1;
+  const op = operations[Math.floor(Math.random() * operations.length)];
+
+  let expression = `${num1} ${op} ${num2}`;
+  let result = 0;
+
+  switch (op) {
+    case "+":
+      result = num1 + num2;
+      break;
+    case "-":
+      result = num1 - num2;
+      break;
+    case "×":
+      result = num1 * num2;
+      break;
+  }
+
+  currentAnswer = result;
+  problemElement.textContent = `Apa hasil dari ${expression}?`;
+  visualizeProblem(num1, num2, op);
+
+  answerInput.value = "";
+  resultElement.textContent = "";
+  resultElement.className = "result";
+  answerInput.focus();
+}
+
+function visualizeProblem(num1, num2, op) {
+  visualization.innerHTML = "";
+  
+  if (op === "+") {
+    for (let i = 0; i < num1; i++) {
+      addImage(images[i % images.length], "group1");
+    }
+    
+    const plus = document.createElement('span');
+    plus.textContent = " + ";
+    plus.style.fontSize = "2rem";
+    plus.style.margin = "0 10px";
+    visualization.appendChild(plus);
+    
+    for (let i = 0; i < num2; i++) {
+      addImage(images[i % images.length], "group2");
+    }
+  } 
+  else if (op === "-") {
+    const total = num1;
+    const toRemove = num2;
+    
+    for (let i = 0; i < total; i++) {
+      const img = addImage(images[i % images.length], i < (total - toRemove) ? "remaining" : "removed");
+      if (i >= (total - toRemove)) {
+        img.style.opacity = "0.5";
+        img.style.filter = "grayscale(100%)";
+      }
+    }
+  } 
+  else if (op === "×") {
+    for (let group = 0; group < num1; group++) {
+      for (let i = 0; i < num2; i++) {
+        addImage(images[i % images.length], `group${group}`);
+      }
+      
+      if (group < num1 - 1) {
+        const plus = document.createElement('span');
+        plus.textContent = " + ";
+        plus.style.fontSize = "2rem";
+        plus.style.margin = "0 5px";
+        visualization.appendChild(plus);
+      }
+    }
+  }
+}
+
+function addImage(src, groupClass) {
+  const img = document.createElement('img');
+  img.src = src;
+  img.classList.add(groupClass);
+  visualization.appendChild(img);
+  return img;
+}
+
+function checkAnswer() {
+  const userAnswer = parseInt(answerInput.value);
+  
+  if (isNaN(userAnswer)) {
+    resultElement.textContent = "Masukkan jawabanmu dulu!";
+    resultElement.className = "result incorrect";
+    return;
+  }
+  
+  if (userAnswer === currentAnswer) {
+    resultElement.textContent = "✅ Jawaban Benar!";
+    resultElement.className = "result correct";
+  } else {
+    resultElement.textContent = `❌ Salah! Jawaban yang benar adalah ${currentAnswer}`;
+    resultElement.className = "result incorrect";
+  }
+  
+  setTimeout(generateProblem, 2000);
+}
+
+checkBtn.addEventListener('click', checkAnswer);
+answerInput.addEventListener('keypress', (e) => {
+  if (e.key === 'Enter') {
+    checkAnswer();
+  }
+});
+
+generateProblem();
+  </script>
+</body>
+</html>
