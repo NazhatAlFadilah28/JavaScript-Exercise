@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hidden Search</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+      * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f5f5f5;
+}
+
+.search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.search-input {
+    padding: 15px;
+    width: 50px;
+    height: 50px;
+    border: none;
+    border-radius: 25px;
+    font-size: 18px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: width 0.3s ease;
+    outline: none;
+}
+
+.search-container.active .search-input {
+    width: 300px;
+    padding-left: 20px;
+}
+
+.search-btn {
+    position: absolute;
+    right: 0;
+    width: 50px;
+    height: 50px;
+    border: none;
+    border-radius: 50%;
+    background-color: #4285f4;
+    color: white;
+    cursor: pointer;
+    font-size: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.search-container.active .search-btn {
+    transform: translateX(10px);
+    background-color: #ff3b30;
+}
+
+@media (max-width: 480px) {
+    .search-container.active .search-input {
+        width: 200px;
+    }
+}
+    </style>
+</head>
+<body>
+    <div class="search-container">
+        <input type="text" class="search-input" placeholder="Search...">
+        <button class="search-btn">
+            <i class="fas fa-search"></i>
+        </button>
+    </div>
+
+    <script src="hidden_search.js"></script>
+</body>
+</html>

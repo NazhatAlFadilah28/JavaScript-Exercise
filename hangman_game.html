@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hangman Game</title>
+    <style>
+      body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.game-container {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    width: 90%;
+    max-width: 500px;
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.hangman-drawing {
+    margin: 20px auto;
+}
+
+.gallows {
+    stroke: #333;
+    stroke-width: 3;
+}
+
+.hm-part {
+    stroke: #d32f2f;
+    stroke-width: 3;
+    fill: none;
+}
+
+#head {
+    fill: none;
+    stroke: #d32f2f;
+    stroke-width: 3;
+}
+
+.word-display {
+    font-size: 2rem;
+    letter-spacing: 10px;
+    margin: 20px 0;
+    min-height: 50px;
+}
+
+.hint, .wrong-letters {
+    margin: 10px 0;
+    font-size: 1.1rem;
+    color: #555;
+}
+
+.keyboard {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5px;
+    margin: 20px 0;
+}
+
+.key {
+    width: 40px;
+    height: 40px;
+    background-color: #e0e0e0;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.key:hover {
+    background-color: #d0d0d0;
+}
+
+.key:disabled {
+    background-color: #a0a0a0;
+    color: white;
+    cursor: not-allowed;
+}
+
+.message {
+    font-size: 1.2rem;
+    margin: 10px 0;
+    min-height: 30px;
+    color: #d32f2f;
+    font-weight: bold;
+}
+
+.reset-btn {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 10px;
+    display: none;
+}
+
+.reset-btn:hover {
+    background-color: #45a049;
+}
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1>Hangman Game</h1>
+        
+        <div class="hangman-drawing">
+            <svg id="hangman-svg" width="200" height="200" viewBox="0 0 200 200">
+                <!-- Gallows -->
+                <line class="gallows" x1="20" y1="180" x2="100" y2="180" />
+                <line class="gallows" x1="60" y1="180" x2="60" y2="20" />
+                <line class="gallows" x1="60" y1="20" x2="140" y2="20" />
+                <line class="gallows" x1="140" y1="20" x2="140" y2="40" />
+                
+                <!-- Hangman parts (initially hidden) -->
+                <circle class="hm-part" id="head" cx="140" cy="60" r="20" style="display: none;" />
+                <line class="hm-part" id="body" x1="140" y1="80" x2="140" y2="130" style="display: none;" />
+                <line class="hm-part" id="left-arm" x1="140" y1="100" x2="110" y2="90" style="display: none;" />
+                <line class="hm-part" id="right-arm" x1="140" y1="100" x2="170" y2="90" style="display: none;" />
+                <line class="hm-part" id="left-leg" x1="140" y1="130" x2="120" y2="160" style="display: none;" />
+                <line class="hm-part" id="right-leg" x1="140" y1="130" x2="160" y2="160" style="display: none;" />
+            </svg>
+        </div>
+        
+        <div class="word-display" id="word-display"></div>
+        <div class="hint">Hint: <span id="hint-text"></span></div>
+        <div class="wrong-letters">Wrong letters: <span id="wrong-letters"></span></div>
+        <div class="keyboard" id="keyboard"></div>
+        <div class="message" id="message"></div>
+        <button class="reset-btn" id="reset-btn">Play Again</button>
+    </div>
+
+    <script src="hangman_game.js"></script>
+</body>
+</html>
