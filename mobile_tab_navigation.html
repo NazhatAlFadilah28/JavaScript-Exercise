@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+:root {
+    --primary-color: #8e44ad;
+    --secondary-color: #9b59b6;
+    --dark-color: #2c3e50;
+    --light-color: #ecf0f1;
+    --nav-bg: #ffffff;
+    --nav-height: 70px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: linear-gradient(135deg, #8e44ad, #9b59b6);
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.phone {
+    position: relative;
+    overflow: hidden;
+    border: 10px solid #fff;
+    border-radius: 30px;
+    height: 650px;
+    width: 350px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+
+.screen {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+.content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: calc(100% - var(--nav-height));
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: all 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+    transform: translateY(10px);
+}
+
+.content.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.content-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+    background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+    color: white;
+    transform: translateY(20px);
+    transition: all 0.5s ease 0.2s;
+    opacity: 0;
+}
+
+.content.show .content-overlay {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.content-overlay h2 {
+    font-size: 1.8rem;
+    margin-bottom: 5px;
+}
+
+.content-overlay p {
+    font-weight: 300;
+    font-size: 0.9rem;
+}
+
+nav {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: var(--nav-height);
+    background-color: var(--nav-bg);
+    box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.1);
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    height: 100%;
+}
+
+nav li {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    cursor: pointer;
+    color: #777;
+    transition: all 0.3s ease;
+}
+
+.nav-icon {
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+}
+
+nav li p {
+    font-size: 0.7rem;
+    margin-top: 5px;
+    transition: all 0.3s ease;
+}
+
+.active-indicator {
+    position: absolute;
+    top: -10px;
+    width: 0;
+    height: 3px;
+    background-color: var(--primary-color);
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+nav li.active {
+    color: var(--primary-color);
+}
+
+nav li.active .nav-icon {
+    transform: translateY(-5px);
+}
+
+nav li.active .active-indicator {
+    width: 30px;
+}
+
+nav li:hover:not(.active) {
+    color: var(--secondary-color);
+}
+
+/* Phone notch styling */
+.phone::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50%;
+    height: 20px;
+    background-color: #fff;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    z-index: 10;
+}
+
+/* Responsive adjustments */
+@media (max-width: 400px) {
+    .phone {
+        height: 600px;
+        width: 320px;
+    }
+}
+    </style>
+    <title>Modern Mobile Navigation</title>
+</head>
+<body>
+    <div class="phone">
+        <div class="screen">
+            <div class="content show" style="background-image: url('https://images.unsplash.com/photo-1480074568708-e7b720bb3f09?ixlib=rb-1.2.1&auto=format&fit=crop&w=1053&q=80')">
+                <div class="content-overlay">
+                    <h2>Welcome Home</h2>
+                    <p>Discover beautiful spaces</p>
+                </div>
+            </div>
+            <div class="content" style="background-image: url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80')">
+                <div class="content-overlay">
+                    <h2>Our Work</h2>
+                    <p>See our latest projects</p>
+                </div>
+            </div>
+            <div class="content" style="background-image: url('https://images.unsplash.com/photo-1471107340929-a87cd0f5b5f3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1266&q=80')">
+                <div class="content-overlay">
+                    <h2>Blog</h2>
+                    <p>Read our latest articles</p>
+                </div>
+            </div>
+            <div class="content" style="background-image: url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1351&q=80')">
+                <div class="content-overlay">
+                    <h2>About Us</h2>
+                    <p>Meet our team</p>
+                </div>
+            </div>
+        </div>
+        
+        <nav>
+            <ul>
+                <li class="active" data-tab="0">
+                    <div class="nav-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <p>Home</p>
+                    <div class="active-indicator"></div>
+                </li>
+                <li data-tab="1">
+                    <div class="nav-icon">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <p>Work</p>
+                    <div class="active-indicator"></div>
+                </li>
+                <li data-tab="2">
+                    <div class="nav-icon">
+                        <i class="fas fa-blog"></i>
+                    </div>
+                    <p>Blog</p>
+                    <div class="active-indicator"></div>
+                </li>
+                <li data-tab="3">
+                    <div class="nav-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <p>About</p>
+                    <div class="active-indicator"></div>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <script src="mobile_tab_navigation.js"></script>
+</body>
+</html>

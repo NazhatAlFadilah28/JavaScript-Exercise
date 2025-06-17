@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Peta Dunia Interaktif</title>
+  <Style>
+    body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background: #6f6c6c;
+}
+
+#map-container {
+  position: relative;
+  width: 80%;
+  margin: auto;
+}
+
+#svgMap {
+  width: 100%;
+  height: auto;
+}
+
+#tooltip {
+  position: absolute;
+  padding: 8px 12px;
+  background: #333;
+  color: #fff;
+  border-radius: 6px;
+  display: none;
+  pointer-events: none;
+  font-size: 14px;
+  white-space: nowrap;
+  z-index: 10;
+}
+  </Style>
+</head>
+<body>
+  <h1>Peta Dunia Interaktif</h1>
+  <div id="map-container">
+    <object id="svgMap" type="image/svg+xml" data="world.svg"></object>
+    <div id="tooltip"></div>
+  </div>
+  <script>
+window.addEventListener('load', () => {
+  const svgMap = document.getElementById("svgMap");
+  const tooltip = document.getElementById("tooltip");
+
+  svgMap.addEventListener("load", function () {
+    const svgDoc = svgMap.contentDocument;
+    const countries = svgDoc.querySelectorAll("path, g");
+
+    countries.forEach(country => {
+      country.addEventListener("mouseover", (e) => {
+        const name = country.getAttribute("name") || country.getAttribute("title") || "Negara Tidak Dikenal";
+        tooltip.innerText = name;
+        tooltip.style.display = "block";
+      });
+
+      country.addEventListener("mousemove", (e) => {
+        tooltip.style.left = e.pageX + 10 + "px";
+        tooltip.style.top = e.pageY + 10 + "px";
+      });
+
+      country.addEventListener("mouseout", () => {
+        tooltip.style.display = "none";
+      });
+    });
+  });
+});
+  </script>
+</body>
+</html>
